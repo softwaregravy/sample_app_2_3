@@ -51,6 +51,7 @@ describe UsersController do
 
  describe "POST 'create'" do
 
+
     describe "failure" do
 
       before(:each) do
@@ -86,7 +87,13 @@ describe UsersController do
         post :create, :user => @attr
         response.should redirect_to(user_path(@user))
       end    
+
+      it "should sign the user in" do 
+        post :create, :user => @attr 
+        controller.should be_signed_in 
+      end 
     end
+
 
 #    it "should have a welcome message" do
 #      post :create, :user => @attr
